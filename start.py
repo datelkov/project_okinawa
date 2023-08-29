@@ -4,11 +4,12 @@ import format_checker
 import gui
 import threading
 import tags_reader
+import playlist_gen
 
 def starter():
     if len(sys.argv) > 1:
-        print (sys.argv)
-        file_path = sys.argv[1]
+        tracklist = playlist_gen.save(sys.argv)
+        file_path = tracklist[0]
         if format_checker.check_format(file_path) == 'flac':
                     track_name=tags_reader.read(file_path)
                     gui_thread = threading.Thread(target=gui.create,args=('Сейчас играет',track_name,))
